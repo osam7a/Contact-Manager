@@ -4,22 +4,70 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include 'head.html' %}
-<body>
-    <header class="w-full bg-neutral-200">
-        <nav class="flex justify-between items-center p-4">
-            <a href="" class="text-3xl">{{ name }}</a>
-            <ul class="flex font-mono uppercase tracking-tight text-lg">
-                <li class="mx-2">
-                    {% translate 'Welcome' %}, <strong>{{ user.username }}</strong> /
-                    <a class="underline text-muted" href="">{% translate 'Logout' %}</a> /
-                    <a class="underline text-muted" href="">{% translate 'Change Password' %}</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+<body id="bodyGrid" class="grid grid-rows-2 grid-cols-2 w-screen h-screen">
+        <header class="w-full bg-neutral-200 col-span-2">
+            <nav class="flex justify-between items-center p-4">
+                <a href="" class="text-3xl">{{ name }}</a>
+                <ul class="flex font-mono uppercase tracking-tight text-lg">
+                    <li class="mx-2">
+                        {% translate 'Welcome' %}, <strong>{{ user.username }}</strong> /
+                        <a class="underline text-muted" href="">{% translate 'Logout' %}</a> /
+                        <a class="underline text-muted" href="">{% translate 'Change Password' %}</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div id="sidebarContainer" class="grid grid-cols-2 grid-rows-1">
+            <div id="sidebarToggle" class="border p-0.5 flex flex-col justify-center cursor-pointer hover:bg-neutral-100">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg>
+            </div>
+            <div id="sidebar" class="border border-e-2 min-w-64 flex flex-col text-sm">
+                <input id="sidebarSearch" class="border border-neutral-400 bg-neutral-200 mt-2 p-0.5 placeholder-gray-400" placeholder="{% translate 'Start typing to search...' %}" type="text" />
+                <table id="sidebarMenu" class="mt-2 text-left">
+                    <thead class="bg-neutral-700 text-white uppercase tracking-widest text-center">
+                        <tr>
+                            <th><a href="">{% translate 'Main Lists' %}</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="sidebar-link even:bg-neutral-200 font-thin">
+                            <th class="ps-2 font-medium">
+                                <div class="flex flex-row justify-between items-center">
+                                    <span class="cursor-pointer">{% translate 'All Contacts' %}</span>
+                                    <div class="flex flex-row justify-between items-center cursor-pointer">
+                                        <svg class="w-6 h-6 fill-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                                        {% translate 'Add' %}
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="sidebar-link even:bg-neutral-200">
+                            <th class="ps-2 font-medium">
+                                <div class="flex flex-row justify-between items-center">
+                                    <span class="cursor-pointer">{% translate 'My Campaigns' %}</span>
+                                    <div class="flex flex-row justify-between items-center cursor-pointer">
+                                        <svg class="w-6 h-6 fill-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                                        {% translate 'Add' %}
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-auto border border-neutral-400 bg-neutral-200 text-lg flex flex-col p-2 leading-6">
+                    <div class="flex flex-row font-bold">Total Contacts:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">Segment Count:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">Bounce Rate:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">Engagement:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">Latest Send:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">Top Source:<span class="font-normal ms-auto">0</span></div>
+                </div>
+            </div>
+        </div>
+        <main class="">
+            test
+            {% block content %}
+            {% endblock %}
+        </main>
 </body>
 </html>
