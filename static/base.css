@@ -1,0 +1,12 @@
+#bodyGrid {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+}
+
+#sidebarContainer {
+    grid-template-columns: auto 1fr;
+}
+
+th {
+    padding: .25rem;
+}
