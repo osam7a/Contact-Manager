@@ -1,0 +1,25 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+    <header class="w-full bg-neutral-200">
+        <nav class="flex justify-between items-center p-4">
+            <a href="" class="text-3xl">{{ name }}</a>
+            <ul class="flex font-mono uppercase tracking-tight text-lg">
+                <li class="mx-2">
+                    {% translate 'Welcome' %}, <strong>{{ user.username }}</strong> /
+                    <a class="underline text-muted" href="">{% translate 'Logout' %}</a> /
+                    <a class="underline text-muted" href="">{% translate 'Change Password' %}</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
