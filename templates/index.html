@@ -1,1 +1,68 @@
 {% extends "base.html" %}
+{% load i18n %}
+
+{% block parent_attrs %}class="p-2 px-8 flex flex-col md:px-16"{% endblock %}
+{% block content %}
+<h1 class="text-2xl">{% translate 'Quick Actions' %}</h1>
+<div class="flex flex-col gap-1 md:flex-row">
+    <a href="" class="border border-neutral-400 p-2 mt-2 hover:bg-neutral-300">
+        <h2 class="text-lg font-medium">{% translate 'New Contact/s' %}</h2>
+        <p class="text-sm">{% translate 'Add or import new contacts to the database' %}</p>
+    </a>
+    <a href="" class="border border-neutral-400 p-2 mt-2 hover:bg-neutral-300">
+        <h2 class="text-lg font-medium">{% translate 'New Campaign' %}</h2>
+        <p class="text-sm">{% translate 'Add a new campaign for your contacts' %}</p>
+    </a>
+    <a href="" class="border border-neutral-400 p-2 mt-2 hover:bg-neutral-300">
+        <h2 class="text-lg font-medium">{% translate 'Export your contacts' %}</h2>
+        <p class="text-sm">{% translate 'Export your contacts to multiple file formats' %}</p>
+    </a>
+</div>
+<div class="flex flex-col gap-2 md:flex-row mt-5">
+    <div>
+        <h1 class="text-2xl">{% translate 'Audience' %}</h1>
+        <div class="border border-neutral-400 p-2 pe-8 mt-2">
+            <div class="flex flex-col gap-3 md:flex-row">
+                <div>
+                    <h2 class="text-md font-normal">{% translate 'Current Contacts' %}</h2>
+                    <hr>
+                    <p class="text-3xl">0</p>
+                </div>
+                <div>
+                    <h2 class="text-md font-normal">{% translate 'New Contacts (last 7 days)' %}</h2>
+                    <hr>
+                    <div class="flex flex-row items-center gap-2">
+                        <p class="text-3xl"> 0</p>
+                        <span class="text-md bg-green-200 rounded rounded-full px-2 font-medium"> +0% </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h1 class="text-2xl">{% translate 'Recent Campaigns' %}</h1>
+        <div class="border border-neutral-400 p-2 mt-2">
+            <table class="text-left">
+                <thead>
+                    <tr class="border *:pe-5 *:font-medium text-sm">
+                        <th>{% translate 'ID' %}</th>
+                        <th>{% translate 'Name' %}</th>
+                        <th>{% translate 'Recipents' %}</th>
+                        <th>{% translate 'Opens' %}</th>
+                        <th>{% translate 'Bounces' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border *:border *:pe-5 *:p-1">
+                        <td>#0</td>
+                        <td class="text-blue-600"><a href="">Test Campaign</a></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
