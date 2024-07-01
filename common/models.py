@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class Source(models.Model):
+class Source(models.Model): # Approx. 0.02 GB per 1 million records
     source_type = models.CharField(default="manual", max_length=100)
     name = models.CharField(default=_("Manually Added"), max_length=100)
     description = models.TextField(default=_("This contact was manually added to the database."))
@@ -9,7 +9,7 @@ class Source(models.Model):
     def __str__(self):
         return self.name
 
-class Contact(models.Model):
+class Contact(models.Model): # Approx. 8.02 GB per 1 million records
     created_at = models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
