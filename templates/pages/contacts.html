@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block parent_attrs %}class="p-4 grid grid-rows-4 grid-cols-2 gap-2" style="grid-template-columns: 3fr 1fr;grid-template-rows: auto auto auto 1fr;"{% endblock %}
+{% block content %}
+<div class="flex flex-col gap-2 justify-between items-stretch col-span-2 text-center md:text-start md:flex-row md:gap-0">
+    <h1 class="text-2xl md:text-3xl">{% translate 'Select Contact to change' %}</h1>
+    <div class="flex flex-row items-stretch justify-center gap-2">
+        <a href="" class="flex items-center rounded px-3 rounded-full border border-neutral-400 hover:bg-neutral-200">{% translate 'Add Single' %}</a>
+        <a href="" class="flex items-center rounded px-3 rounded-full bg-primary border border-neutral-400 bg-primary-hover">{% translate 'Import' %}</a>
+    </div>
+</div>
+<div class="p-3 bg-neutral-200 flex flex-row justify-start gap-2 items-stretch">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 -960 960 960" fill="current"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+    <input id="sidebarSearch" class="border border-neutral-400 bg-neutral-100 p-0.5 px-1 placeholder-gray-400" placeholder="{% translate 'Search for a specific contact..' %}" type="text" />
+    <button id="searchButton" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">Search</button>
+</div>
+<div class="row-span-3">
+    <div class="bg-neutral-200 flex flex-col border border-neutral-500">
+        <h1 class="w-full bg-primary text-center text-2xl border-b border-neutral-500">{% translate 'Filters & Info' %}</h1>
+        <div class="p-2">
+            <h2 class="text-lg font-medium">{% translate 'Tags' %}</h2>
+            <div class="border border-neutral-500 p-2 overflow-auto mt-1 max-h-64">
+                <input id="tagSearch" class="sticky top-0 border border-neutral-400 bg-neutral-100 w-full p-0.5 px-1 placeholder-gray-400" placeholder="{% translate 'Filter for a specific tag..' %}" type="text" />
+                <hr class="mb-1">
+                {% if not tags %}
+                <div class="flex flex-row items-center justify-center">
+                    <span class="text-lg">{% translate 'No tags found!' %}</span>
+                </div>
+                {% endif %}
+                {% for tag in tags %}
+                <div class="flex flex-row items-center gap-1">
+                    <input type="checkbox" />
+                    <span class="bg-neutral-200 rounded-box p-1 border border-neutral-500">{{ tag }}</span> 
+                </div>
+                {% endfor %}
+            </div>
+            <h2 class="text-lg font-medium mt-1">{% translate 'Attributes' %}</h2>
+            <div class="flex flex-row items-center gap-1">
+                <input type="checkbox" />
+                <span class="text-lg">{% translate 'Subscribed' %}</span>
+            </div>
+            <div class="flex flex-row items-center gap-1">
+                <input type="checkbox" />
+                <span class="text-lg">{% translate 'Hard Bounced' %}</span>
+            </div>
+            <div class="border border-neutral-500 p-2 overflow-auto mt-1 max-h-64">
+                <input id="sourceSearch" class="sticky top-0 border border-neutral-400 bg-neutral-100 w-full p-0.5 px-1 placeholder-gray-400" placeholder="{% translate 'Filter for a specific tag..' %}" type="text" />
+                <hr class="mb-1">
+                {% if not source %}
+                <div class="flex flex-row items-center justify-center">
+                    <span class="text-lg">{% translate 'No sources found!' %}</span>
+                </div>
+                {% endif %}
+                {% for source in sources %}
+                <div class="flex flex-row items-center gap-1">
+                    <input type="checkbox" />
+                    <span class="bg-neutral-200 rounded-box p-1 border border-neutral-500">{{ source }}</span> 
+                </div>
+                {% endfor %}
+            </div>
+            <button id="applyFilters" class="mt-2 bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">Apply</button>
+        </div>
+    </div>
+</div>
+<div class="mt-3 flex flex-row justify-start items-stretch gap-1">
+    <span class="text-xl me-2">Actions:</span>
+    <select class="border border-neutral-400 bg-neutral-200 hover:bg-neutral-300" name="action" id="action">
+        <option value="">{% translate 'Select an action' %}</option>
+        <option value="delete">{% translate 'Delete' %}</option>
+        <option value="export">{% translate 'Export' %}</option>
+    </select>
+    <button id="applyActions" class="bg-neutral-200 hover:bg-neutral-300 px-2 rounded-box border border-neutral-400">{% translate 'Apply' %}</button>
+</div>
+<div class="overflow-auto">
+    <table class="text-left w-full whitespace-nowrap"> 
+        <thead class="bg-neutral-700 text-white">
+            <tr class="border *:border *:p-2 *:font-medium text-sm">
+                <th class="text-center"><input type="checkbox" name="select-all" id="select-all" /></th>
+                <th>{% translate 'Email Address' %}</th>
+                <th>{% translate 'First Name' %}</th>
+                <th>{% translate 'Last Name' %}</th>
+                <th>{% translate 'Address' %}</th>
+                <th>{% translate 'Phone Number' %}</th>
+                <th>{% translate 'Birthday' %}</th>
+                <th>{% translate 'Title' %}</th>
+                <th>{% translate 'Company Name' %}</th>
+                <th>{% translate 'Tags' %}</th>
+                <th>{% translate 'Subscribed' %}</th>
+                <th>{% translate 'Source' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border *:border *:p-2">
+            {% if not contacts %}
+                <td colspan="12" class="text-center">{% translate 'No contacts found!' %}</td>
+            {% else %}
+            {% for contact in contacts.all %}
+                <td class="text-center"><input type="checkbox" name="select-one" id="select-one-1" /></td>
+                <td class="text-blue-600"><a href="">{{ contact.email }}</a></td>
+                <td>{{ contact.first_name }}</td>
+                <td>{{ contact.last_name }}</td>
+                <td>{{ contact.address }}</td>
+                <td>{{ contact.phone_number }}</td>
+                <td>{{ contact.birthday }}</td>
+                <td>{{ contact.title }}</td>
+                <td>{{ contact.company }}</td>
+                <td>
+                    {% for tag in contact.tags.all %}
+                    <span class="bg-neutral-200 rounded-box p-1 border border-neutral-500">{{ tag }}</span>
+                    {% endfor %}
+                    {% if not contact.tags.all %}
+                    {% translate 'Untagged' %}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if contact.subscribed %}
+                    <span class="bg-green-200 rounded-box p-1 border border-neutral-500">Subscribed</span>
+                    {% else %}
+                    <span class="bg-red-200 rounded-box p-1 border border-neutral-500">Not subscribed</span>
+                    {% endif %}
+                </td>
+                <td class="text-blue-600 font-medium">
+                    {% if contact.source.type == 'import' %}
+                    <a href="">Import #{{ contact.source.id }}</a>
+                    {% else %}
+                    {{ contact.source.name}}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script src="{% static 'contacts.js' %}"></script>
+{% endblock %}
