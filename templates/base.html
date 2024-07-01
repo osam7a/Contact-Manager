@@ -22,7 +22,10 @@
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg>
             </div>
             <div id="sidebar" class="border border-e-2 min-w-64 flex flex-col text-sm">
-                <input id="sidebarSearch" class="border border-neutral-400 bg-neutral-200 mt-2 p-0.5 placeholder-gray-400" placeholder="{% translate 'Start typing to search...' %}" type="text" />
+                <input id="sidebarSearch" class="border border-neutral-400 bg-neutral-100 mt-2 p-0.5 placeholder-gray-400" placeholder="{% translate 'Start typing to search..' %}" type="text" />
+                <a href="/" class="flex flex-row w-full justify-between items-center p-1 ps-2 mt-2 cursor-pointer hover:bg-neutral-300">
+                    <span class="text-md font-medium">{% translate 'Home' %}</span>
+                </a>
                 <table id="sidebarMenu" class="mt-2 text-left">
                     <thead class="bg-neutral-700 text-white uppercase tracking-widest text-center">
                         <tr>
@@ -30,42 +33,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="sidebar-link even:bg-neutral-200 font-thin">
+                        <tr class="even:bg-neutral-200">
                             <th class="ps-2 font-medium">
                                 <div class="flex flex-row justify-between items-center">
-                                    <span class="cursor-pointer">{% translate 'All Contacts' %}</span>
-                                    <div class="flex flex-row justify-between items-center cursor-pointer">
+                                    <a href="{% url 'contacts' %}" class="sidebar-link cursor-pointer">{% translate 'All Contacts' %}</a>
+                                    <a href="" class="sidebar-link flex flex-row justify-between items-center cursor-pointer">
                                         <svg class="w-6 h-6 fill-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                                         {% translate 'Add' %}
-                                    </div>
+                                    </a>
                                 </div>
                             </th>
                         </tr>
                         <tr class="sidebar-link even:bg-neutral-200">
                             <th class="ps-2 font-medium">
                                 <div class="flex flex-row justify-between items-center">
-                                    <span class="cursor-pointer">{% translate 'My Campaigns' %}</span>
-                                    <div class="flex flex-row justify-between items-center cursor-pointer">
+                                    <a href="" class="sidebar-link cursor-pointer">{% translate 'My Campaigns' %}</a>
+                                    <a href="" class="sidebar-link flex flex-row justify-between items-center cursor-pointer">
                                         <svg class="w-6 h-6 fill-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                                         {% translate 'Add' %}
-                                    </div>
+                                    </a>
                                 </div>
                             </th>
                         </tr>
                     </tbody>
                 </table>
                 <div class="mt-auto border border-neutral-400 bg-neutral-200 text-lg flex flex-col p-2 leading-6">
-                    <div class="flex flex-row font-bold">Total Contacts:<span class="font-normal ms-auto">0</span></div>
-                    <div class="flex flex-row font-bold">Segment Count:<span class="font-normal ms-auto">0</span></div>
-                    <div class="flex flex-row font-bold">Bounce Rate:<span class="font-normal ms-auto">0</span></div>
-                    <div class="flex flex-row font-bold">Engagement:<span class="font-normal ms-auto">0</span></div>
-                    <div class="flex flex-row font-bold">Latest Send:<span class="font-normal ms-auto">0</span></div>
-                    <div class="flex flex-row font-bold">Top Source:<span class="font-normal ms-auto">0</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Total Contacts' %}:<span class="font-normal ms-auto">{{ contacts|length }}</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Segment Count' %}:<span class="font-normal ms-auto">{{ segments|length }}</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Bounce Rate' %}:<span class="font-normal ms-auto">{{ bounce_rate }}</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Engagement' %}:<span class="font-normal ms-auto">{{ engagement }}</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Latest Send' %}:<span class="font-normal ms-auto">{{ latest_send }}</span></div>
+                    <div class="flex flex-row font-bold">{% translate 'Top Source' %}:<span class="font-normal ms-auto">{{ top_source }}</span></div>
                 </div>
             </div>
         </div>
-        <main class="">
-            test
+        <main {% block parent_attrs %}{% endblock %}>
             {% block content %}
             {% endblock %}
         </main>
