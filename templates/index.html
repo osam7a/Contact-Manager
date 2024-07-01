@@ -26,14 +26,14 @@
                 <div>
                     <h2 class="text-md font-normal">{% translate 'Current Contacts' %}</h2>
                     <hr>
-                    <p class="text-3xl">0</p>
+                    <p class="text-3xl">{{ contacts|length }}</p>
                 </div>
                 <div>
                     <h2 class="text-md font-normal">{% translate 'New Contacts (last 7 days)' %}</h2>
                     <hr>
                     <div class="flex flex-row items-center gap-2">
-                        <p class="text-3xl"> 0</p>
-                        <span class="text-md bg-green-200 rounded rounded-full px-2 font-medium"> +0% </span>
+                        <p class="text-3xl">{{ new_contacts|length|default:0 }}</p>
+                        <span class="text-md {% if new_contacts_percentage  >= 0 %}bg-green-200{% else %}bg-red-200{% endif %} rounded rounded-full px-2 font-medium">{% if new_contacts_percentage > 0 %}+{% endif %}{{ new_contacts_percentage|default:0 }}%</span>
                     </div>
                 </div>
             </div>
