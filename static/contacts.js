@@ -1,6 +1,7 @@
 var selected = [];
 
-$("#select-all").on("change", function() {
+$("#select-all-current").on("change", function() {
+    selected = [];
     $("[id^=select-one-]").prop("checked", $(this).prop("checked"));
     // add the numbers after select-one- to the selected array
     if ($(this).prop("checked")) {
@@ -10,6 +11,9 @@ $("#select-all").on("change", function() {
     } else {
         selected = [];
     }
+    
+    var currentText = $('#selectionCount').text().split(' ').slice(1, 5).join(' ');
+    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="#" id="select-all" class="text-blue-500">Select All</a>');
 });
 
 $("[id^=select-one-]").on("change", function() {
@@ -24,8 +28,11 @@ $("[id^=select-one-]").on("change", function() {
     }
     // if all checkboxes are checked, check the select-all checkbox
     if ($("[id^=select-one-]").length == $("[id^=select-one-]:checked").length) {
-        $("#select-all").prop("checked", true);
+        $("#select-all-current").prop("checked", true);
     } else {
-        $("#select-all").prop("checked", false);
+        $("#select-all-current").prop("checked", false);
     }
+
+    var currentText = $('#selectionCount').text().split(' ').slice(1, 5).join(' ');
+    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="#" id="select-all" class="text-blue-500">Select All</a>');
 });
