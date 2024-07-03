@@ -252,7 +252,7 @@ Use this space to list resources you find helpful and would like to give credit 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/osam7a/Contact-Manager.svg?style=for-the-badge
 [contributors-url]: https://github.com/osam7a/Contact-Manager/graphs/contributors
-[commits-shield]: https://img.shields.io/github/commit-activity/m/osam7a/Contact-Manager.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/t/osam7a/Contact-Manager.svg?style=for-the-badge
 [commits-url]: https://github.com/osam7a/Contact-Manager/commits/
 [stars-shield]: https://img.shields.io/github/stars/osam7a/Contact-Manager.svg?style=for-the-badge
 [stars-url]: https://github.com/osam7a/Contact-Manager/stargazers
