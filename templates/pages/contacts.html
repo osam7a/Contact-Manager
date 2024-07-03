@@ -4,12 +4,43 @@
 
 {% block parent_attrs %}class="p-4 grid grid-rows-4 grid-cols-2 gap-2" style="grid-template-columns: 3fr 1fr;grid-template-rows: auto auto auto 1fr;"{% endblock %}
 {% block content %}
+<div class="modal shadow-lg p-4 bg-slate-700 text-white min-w-96 z-50 hidden" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); grid-template-rows: auto 1fr;" id="importModal">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="text-xl font-medium">Import Contacts</h1>
+        <button class="modal-close" id="closeModal">
+            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="white"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+    </div>
+    <hr class="mb-3 mt-1">
+    <!-- <form action="" enctype="multipart/form-data" method="post" id="imageForm" class="mb-0">
+        {% csrf_token %}
+        <div id="contacts-preview" class="cursor-pointer *:cursor-pointer h-full w-full p-5 border-dashed border-2 border-neutral-500 rounded-lg flex items-center justify-center text-center">
+        <input id="upload-contacts" name="logo" type="file" class="hidden" accept="text/csv" mmultiple />
+        <label for="upload-contacts" class="text-current">
+            <svg class="h-12 w-12 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>
+            <h5 class="text-xl font-bold tracking-tight">{% translate "Your contact lists.." %}</h5>
+            <p class="font-normal text-sm md:px-6">{% translate 'Upload 1 or multiple contact lists in CSV format.' %}</p>
+        </label>
+        </div>
+    </form> -->
+    <input
+        type="file"
+        class="text-sm
+            file:mr-5 file:py-1 file:px-3 file:border-[1px]
+            file:text-xs file:font-medium
+            hover:file:cursor-pointer hover:file:bg-blue-50
+            hover:file:text-blue-700 w-full"
+        multiple
+        accept="text/csv"
+    />
+    <button class="float-right text-black mt-1 bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700">{% translate 'Import' %}</button>
+</div>
 <p id="csrf" class="hidden">{{ csrf_token }}</p>
 <div class="flex flex-col gap-2 justify-between items-stretch col-span-2 text-center md:text-start md:flex-row md:gap-0">
     <h1 class="text-2xl md:text-3xl">{% translate 'Select Contact to change' %}</h1>
     <div class="flex flex-row items-stretch justify-center gap-2">
         <a href="" class="flex items-center rounded px-3 rounded-full border border-neutral-400 hover:bg-neutral-200">{% translate 'Add Single' %}</a>
-        <a href="" class="flex items-center rounded px-3 rounded-full bg-primary border border-neutral-400 bg-primary-hover">{% translate 'Import' %}</a>
+        <a data-toggle="modal" data-target="#importModal" href="javascript:void(0);" class="flex items-center rounded px-3 rounded-full bg-primary border border-neutral-400 bg-primary-hover">{% translate 'Import' %}</a>
     </div>
 </div>
 <div class="p-3 bg-neutral-200 flex flex-row justify-start gap-2 items-stretch">
