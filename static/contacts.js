@@ -14,7 +14,7 @@ $("#select-all-current").on("change", function() {
     }
     
     var currentText = $('#selectionCount').text().split(' ').slice(1, 5).join(' ');
-    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="#" id="select-all" class="text-blue-500">Select All</a>');
+    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="javascript:void(0);" id="select-all" class="text-blue-500">Select All</a>');
 });
 
 $("[id^=select-one-]").on("change", function() {
@@ -36,20 +36,51 @@ $("[id^=select-one-]").on("change", function() {
     }
 
     var currentText = $('#selectionCount').text().split(' ').slice(1, 5).join(' ');
-    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="#" id="select-all" class="text-blue-500">Select All</a>');
+    $('#selectionCount').html(selected.length + ' ' + currentText + ' <a href="javascript:void(0);" id="select-all" class="text-blue-500">Select All</a>');
 });
 
-$("#select-all").on("click", function() {
+$(document).on("click", "#select-all", function() {
     allSelected = !allSelected;
-    
     selected = [];
+     
     if (allSelected) {
+        $("#select-all-current").prop("checked", true)
         $("[id^=select-one-]").prop("checked", true);
     } else {
+        $("#select-all-current").prop("checked", false)
         $("[id^=select-one-]").prop("checked", false);
     }
 
     var currentText = $('#selectionCount').text().split(' ').slice(1, 5).join(' ');
-    var totalContacts = $('#selectionCount').text().split(' ').slice(5, 6).join(' ');
-    $('#selectionCount').html(allSelected ? totalContacts : selected.length + ' ' + currentText + ` <a href="#" id="select-all" class="text-blue-500">${allSelected ? 'Unselect' : 'Select'} All</a>`);
+    var totalContacts = currentText.split(' ')[2];
+    $('#selectionCount').html((allSelected ? totalContacts : selected.length) + ' ' + currentText + ` <a href="javascript:void(0);" id="select-all" class="text-blue-500">${allSelected ? 'Unselect' : 'Select'} All</a>`);
+});
+
+$("#applyActions").on("click", function() {
+    // send POST request to /contacts/action
+    var action = $("#action").val();
+
+    if (action == "") {
+        return;
+    }
+
+    if (selected.length == 0 && !allSelected || $("[id^=select-one-]:checked").length == 0) {
+        return;
+    }
+
+    console.log(selected);
+
+    $.ajax({
+        url: "/contacts/action",
+        type: "POST",
+        data: {
+            action: action,
+            'target[]': allSelected ? "all" : selected,
+            csrfmiddlewaretoken: $("#csrf").text()
+        },
+        success: function(data) {
+            alert(data);
+            location.reload();
+        }
+    });
 });
