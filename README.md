@@ -21,7 +21,7 @@
 <div align="center">
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+[![Commits][commits-shield]][commits-url]
 [![Issues][issues-shield]][issues-url]
 [![GNU GPLv3 License][license-shield]][license-url]
 
@@ -252,8 +252,8 @@ Use this space to list resources you find helpful and would like to give credit 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/osam7a/Contact-Manager.svg?style=for-the-badge
 [contributors-url]: https://github.com/osam7a/Contact-Manager/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/osam7a/Contact-Manager.svg?style=for-the-badge
-[forks-url]: https://github.com/osam7a/Contact-Manager/network/members
+[commits-shield]: https://img.shields.io/github/commit-activity/m/osam7a/Contact-Manager.svg?style=for-the-badge
+[commits-url]: https://github.com/osam7a/Contact-Manager/commits/
 [stars-shield]: https://img.shields.io/github/stars/osam7a/Contact-Manager.svg?style=for-the-badge
 [stars-url]: https://github.com/osam7a/Contact-Manager/stargazers
 [issues-shield]: https://img.shields.io/github/issues/osam7a/Contact-Manager.svg?style=for-the-badge
