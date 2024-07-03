@@ -98,11 +98,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for contact in contacts %}
-            <tr class="border *:border *:p-2">
             {% if not contacts %}
-                <td colspan="12" class="text-center">{% translate 'No contacts found!' %}</td>
+                <td colspan="12" class="text-center border border-neutral-500">{% translate 'No contacts found!' %}</td>
             {% else %}
+            {% for contact in contacts %}
+            <tr id="contact-{{ contact.id }}" class="border *:border *:p-2">
                 <td class="text-center"><input type="checkbox" name="select-one" id="select-one-1" /></td>
                 <td class="text-blue-600"><a href="">{{ contact.email }}</a></td>
                 <td>{{ contact.first_name }}</td>
@@ -134,9 +134,9 @@
                     {{ contact.source.name}}
                     {% endif %}
                 </td>
-            {% endif %}
             </tr>
             {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>
