@@ -9,7 +9,7 @@ from .paginator import Paginator
 from apps.common.models import Contact
 
 base_context = {
-    'name': "I-Trust Systems",
+    'name': "Contact Manager",
 }
 
 PAGE_SIZE = 13
