@@ -259,7 +259,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [issues-shield]: https://img.shields.io/github/issues/osam7a/Contact-Manager.svg?style=for-the-badge
 [issues-url]: https://github.com/osam7a/Contact-Manager/issues
 [license-shield]: https://img.shields.io/github/license/osam7a/Contact-Manager.svg?style=for-the-badge
-[license-url]: https://github.com/osam7a/Contact-Manager/blob/master/LICENSE.txt
+[license-url]: https://github.com/osam7a/Contact-Manager/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png
 [Django]: https://img.shields.io/badge/Django-white?style=for-the-badge&logo=django&logoColor=103e2e
 [Django-url]: https://docs.djangoproject.com/en/5.0/
