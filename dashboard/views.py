@@ -17,7 +17,10 @@ def index(request):
     context = deepcopy(base_context)
     context['contacts'] = Contact.objects.all()
     context['new_contacts'] = Contact.objects.filter(created_at__gte=timezone.now()-timedelta(days=7))
-    context['new_contacts_percentage'] = len(context['new_contacts']) / len(context['contacts']) * 100
+    try:
+        context['new_contacts_percentage'] = len(context['new_contacts']) / len(context['contacts']) * 100
+    except ZeroDivisionError:
+        context['new_contacts_percentage'] = 0
 
     return render(request, 'index.html', context)
 
