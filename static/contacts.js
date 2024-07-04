@@ -91,7 +91,6 @@ document.body.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const spot = urlParams.get('spot');
     const error = urlParams.get('error');
-    console.log(urlParams);
     const message = urlParams.get('message');
 
     if (spot) {
