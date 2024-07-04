@@ -1,12 +1,14 @@
 from copy import deepcopy
 from datetime import timedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils import timezone
 from django.http import HttpResponse
 
 from .paginator import Paginator
-from apps.common.models import Contact
+from .forms import ContactForm
+from apps.common.models import Contact, Method
 
 base_context = {
     'name': "Contact Manager",
@@ -36,6 +38,7 @@ def contacts(request):
     context['contacts'] = paginated_contacts
     context['total_contacts'] = Contact.objects.count()
     context['pages_count'] = paginator.get_num_pages()
+    context['contact_form'] = ContactForm()
 
     return render(request, 'pages/contacts.html', context)
 
@@ -54,3 +57,23 @@ def contacts_action(request):
         pass
 
     return HttpResponse("Action successful", status=200)
+
+def contacts_create(request):
+    data = {k: v for k, v in request.POST.dict().items() if v}
+    del data['csrfmiddlewaretoken']
+    for key in data:
+        if not data[key]: del data[key]
+    data['subscribed'] = data.get('subscribed') == 'true'
+
+    method = Method.objects.create()
+    method.save()
+    try: 
+        contact = Contact.objects.update_or_create(**data, method=method)
+        contact = contact[0]
+    except Exception as e:
+        return redirect(reverse('contacts') + f'?error=1&message={e}')
+
+    paginator = Paginator(PAGE_SIZE, list(Contact.objects.all()))
+    page = paginator.find(contact)
+
+    return redirect(reverse('contacts') + f'?p={page}&spot=contact-{contact.id}&error=0&message=Contact {contact.first_name} {contact.last_name} created successfully')
