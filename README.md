@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/osam7a/Contact-Manager/pull/73 -->
+<!-- Improved compatibility of back to top link: See: https://github.com/osam7a/ContactHub/pull/73 -->
 <a id="readme-top"></a>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -32,23 +32,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/osam7a/Contact-Manager">
+  <a href="https://github.com/osam7a/ContactHub">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Contact Manager</h3>
+  <h3 align="center">ContactHub - Contact Managing Software</h3>
 
   <p align="center">
     A simple, yet practical Django webserver for managing, hosting & serving marketing contacts for your business.
     <br />
-    <a href="https://github.com/osam7a/Contact-Manager/blob"><strong>See the change logs »</strong></a>
+    <a href="https://github.com/osam7a/ContactHub/blob"><strong>See the change logs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/osam7a/Contact-Manager">View Demo</a>
+    <a href="https://github.com/osam7a/ContactHub">View Demo</a>
     ·
-    <a href="https://github.com/osam7a/Contact-Manager/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/osam7a/ContactHub/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/osam7a/Contact-Manager/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/osam7a/ContactHub/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -87,11 +87,11 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Companies frequently face challenges in managing and hosting their large marketing contact lists, often resorting to expensive SaaS subscriptions for this purpose. That's why we developed Contact Manager, a straightforward Django web server designed specifically for hosting and managing large contact lists with ease. 
+Companies frequently face challenges in managing and hosting their large marketing contact lists, often resorting to expensive SaaS subscriptions for this purpose. That's why we developed ContactHub, a straightforward Django web server designed specifically for hosting and managing large contact lists with ease. 
 
 * Your time should be spent on creating something amazing, solving problems, and helping others, not on managing the large contact lists.
 * Simple import / export logic assisting with quick and easy management on the large numbers, which you will NEVER lose.
-* While no single tool can meet every project's unique requirements, Contact Manager is designed to be flexible and will continue to evolve. We welcome your suggestions and contributions; feel free to fork this repo and create a pull request or open an issue.
+* While no single tool can meet every project's unique requirements, ContactHub is designed to be flexible and will continue to evolve. We welcome your suggestions and contributions; feel free to fork this repo and create a pull request or open an issue.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,14 +112,14 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- DEV QUICKSTART -->
 ## Developer's Quickstart
 
-The developer's quick start on installing & running the Contact Manager.
+The developer's quick start on installing & running the ContactHub.
 
 ### Installation
 
 1. Make sure you have Python 3.9 or greater installed on your device to avoid any conflicts
 2. Clone the repository from Github using Git
 ```bash
-git clone https://github.com/osam7a/Contact-Manager
+git clone https://github.com/osam7a/ContactHub
 ```
 3. Create & Activate a Python virtual environment
 ```bash
@@ -189,7 +189,7 @@ _TBA_
         - [ ] Chinese
         - [ ] Spanish
 
-See the [open issues](https://github.com/osam7a/Contact-Manager/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/osam7a/ContactHub/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -227,7 +227,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Osama - osamaziadalhinawi@gmail.com
 
-Project Link: [https://github.com/osam7a/Contact-Manager](https://github.com/osam7a/Contact-Manager)
+Project Link: [https://github.com/osam7a/ContactHub](https://github.com/osam7a/ContactHub)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -250,16 +250,16 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/osam7a/Contact-Manager.svg?style=for-the-badge
-[contributors-url]: https://github.com/osam7a/Contact-Manager/graphs/contributors
-[commits-shield]: https://img.shields.io/github/commit-activity/t/osam7a/Contact-Manager.svg?style=for-the-badge
-[commits-url]: https://github.com/osam7a/Contact-Manager/commits/
-[stars-shield]: https://img.shields.io/github/stars/osam7a/Contact-Manager.svg?style=for-the-badge
-[stars-url]: https://github.com/osam7a/Contact-Manager/stargazers
-[issues-shield]: https://img.shields.io/github/issues/osam7a/Contact-Manager.svg?style=for-the-badge
-[issues-url]: https://github.com/osam7a/Contact-Manager/issues
-[license-shield]: https://img.shields.io/github/license/osam7a/Contact-Manager.svg?style=for-the-badge
-[license-url]: https://github.com/osam7a/Contact-Manager/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/osam7a/ContactHub.svg?style=for-the-badge
+[contributors-url]: https://github.com/osam7a/ContactHub/graphs/contributors
+[commits-shield]: https://img.shields.io/github/commit-activity/t/osam7a/ContactHub.svg?style=for-the-badge
+[commits-url]: https://github.com/osam7a/ContactHub/commits/
+[stars-shield]: https://img.shields.io/github/stars/osam7a/ContactHub.svg?style=for-the-badge
+[stars-url]: https://github.com/osam7a/ContactHub/stargazers
+[issues-shield]: https://img.shields.io/github/issues/osam7a/ContactHub.svg?style=for-the-badge
+[issues-url]: https://github.com/osam7a/ContactHub/issues
+[license-shield]: https://img.shields.io/github/license/osam7a/ContactHub.svg?style=for-the-badge
+[license-url]: https://github.com/osam7a/ContactHub/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png
 [Django]: https://img.shields.io/badge/Django-white?style=for-the-badge&logo=django&logoColor=103e2e
 [Django-url]: https://docs.djangoproject.com/en/5.0/
