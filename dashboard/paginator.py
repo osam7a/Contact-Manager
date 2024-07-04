@@ -10,3 +10,6 @@ class Paginator:
     
     def get_num_pages(self):
         return len(self.items) // self.page_size + 1
+    
+    def find(self, item):
+        return self.items.index(item) // self.page_size + 1
