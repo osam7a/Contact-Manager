@@ -1,6 +1,6 @@
 import sys, os
 
-INTERP = os.environ['HOME'] + '/repositories/Contact-Manager/venv/bin/python'
+INTERP = os.environ['HOME'] + '/repositories/ContactHub/venv/bin/python'
 if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
 
-from ContactManager.wsgi import application
+from ContactHub.wsgi import application

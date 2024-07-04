@@ -9,7 +9,7 @@ def main():
 
     runserver.default_port = "30001"
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ContactManager.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ContactHub.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
