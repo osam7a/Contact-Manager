@@ -2,6 +2,7 @@ var selected = [];
 var allSelected = false;
 
 $("#select-all-current").on("change", function() {
+    allSelected = $(this).prop("checked");
     selected = [];
     $("[id^=select-one-]").prop("checked", $(this).prop("checked"));
     // add the numbers after select-one- to the selected array
@@ -84,3 +85,29 @@ $("#applyActions").on("click", function() {
         }
     });
 });
+
+document.body.onload = () => {
+    // check if paramater ?spot= is in the url
+    const urlParams = new URLSearchParams(window.location.search);
+    const spot = urlParams.get('spot');
+    const error = urlParams.get('error');
+    console.log(urlParams);
+    const message = urlParams.get('message');
+
+    if (spot) {
+        // scroll to the spot
+        $('#contactsContainer').animate({
+            scrollTop: $("#" + spot).offset().top
+        }, 1000);
+        $("#" + spot).toggleClass('bg-yellow-200');
+    }
+    if (error == '1') {
+        $("#alertBox").toggleClass("hidden").toggleClass("bg-red-200 border-red-500");
+        $("#alertTitle").text("Error");
+        $("#alertMessage").text(message || "An error occurred while processing your request. Please try again later.");
+    } else if (error == '0') {
+        $("#alertBox").toggleClass("hidden").toggleClass("bg-green-200 border-green-500");
+        $("#alertTitle").text("Success");
+        $("#alertMessage").text(message || "Your request has been processed successfully.");
+    }
+};
