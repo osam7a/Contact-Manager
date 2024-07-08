@@ -1,0 +1,6 @@
+{% load i18n %}
+
+<button id="previousPage" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">{% translate 'Previous' %}</button>
+<input id="pageInput" type="text" class="border border-neutral-500 max-w-7 text-center" value="{{ request.GET.p|default:'1' }}" max="{{ pages_count }}">
+<h1 id="pagesInfo" class="text-lg">{% translate 'of' %} {{ pages_count }}</h1>
+<button id="nextPage" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">{% translate 'Next' %}</button>
