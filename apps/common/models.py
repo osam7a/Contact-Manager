@@ -28,7 +28,8 @@ class Contact(models.Model): # Approx. 8.02 GB per 1 million records
     phone = models.CharField(max_length=20, blank=True, help_text=_("The phone number of the contact."))
     birthday = models.DateField(blank=True, null=True, help_text=_("The birthday of the contact."))
 
-    last_sent = models.DateTimeField(blank=True, null=True, help_text=_("The last time a message was sent to the contact."))
+    recently_contacted = models.BooleanField(default=False, help_text=_("Whether the contact was recently contacted in a campaign or not."))
+    recently_bounced = models.BooleanField(default=False, help_text=_("Whether the contact recently bounced in one of the campiagns or not."))
     subscribed = models.BooleanField(default=True, help_text=_("Whether the contact is subscribed or not."))
     source = models.CharField(blank=True, max_length=255, help_text=_("The source of the contact."))
     method = models.ForeignKey(Method, on_delete=models.CASCADE, null=True, help_text=_("The method used to add the contact."))
