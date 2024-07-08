@@ -105,9 +105,11 @@ document.body.onload = () => {
         $("#alertBox").toggleClass("hidden").toggleClass("bg-red-200 border-red-500");
         $("#alertTitle").text("Error");
         $("#alertMessage").text(message || "An error occurred while processing your request. Please try again later.");
+        $("#mainContainer").css({"grid-template-rows": "auto auto auto auto 1fr"})
     } else if (error == '0') {
         $("#alertBox").toggleClass("hidden").toggleClass("bg-green-200 border-green-500");
         $("#alertTitle").text("Success");
         $("#alertMessage").text(message || "Your request has been processed successfully.");
+        $("#mainContainer").css({"grid-template-rows": "auto auto auto auto 1fr"})
     }
 };
