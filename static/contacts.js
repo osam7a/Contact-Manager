@@ -2,7 +2,7 @@ var selected = [];
 var allSelected = false;
 
 $("#select-all-current").on("change", function() {
-    allSelected = $(this).prop("checked");
+    allSelected = false;
     selected = [];
     $("[id^=select-one-]").prop("checked", $(this).prop("checked"));
     // add the numbers after select-one- to the selected array
@@ -19,6 +19,7 @@ $("#select-all-current").on("change", function() {
 });
 
 $("[id^=select-one-]").on("change", function() {
+    allSelected = false;
     if ($(this).prop("checked")) {
         // get the parent id and add it to the selected array
         selected.push($(this).parents("tr").attr("id").split("-")[1])
