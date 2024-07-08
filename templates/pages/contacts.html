@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block parent_attrs %}class="overflow-auto p-4 grid grid-rows-4 grid-cols-2 gap-2" style="grid-template-columns: 3fr 1fr;grid-template-rows: auto auto auto{% if message %} auto{% endif %} 1fr;"{% endblock %}
+{% block parent_attrs %}class="overflow-auto p-4 grid grid-rows-4 grid-cols-2 gap-2" style="grid-template-columns: 3fr 1fr;grid-template-rows: auto auto auto 1fr;"{% endblock %}
 {% block content %}
 
 {% include 'components/modals/contacts_import.html' %}
