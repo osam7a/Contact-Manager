@@ -40,6 +40,9 @@ def contacts(request):
     context['pages_count'] = paginator.get_num_pages()
     context['contact_form'] = ContactForm()
 
+    if request.GET.get('error') and request.GET.get('message'):
+        context['message'] = ("Error" if bool(int(request.GET.get('error'))) else "Success", request.GET.get('message'))
+
     return render(request, 'pages/contacts.html', context)
 
 def contacts_action(request):
@@ -63,8 +66,8 @@ def contacts_create(request):
     del data['csrfmiddlewaretoken']
     for key in data:
         if not data[key]: del data[key]
-    data['subscribed'] = data.get('subscribed') == 'true'
-
+        if data[key] in ("on","off"): data[key] = data[key] == "on"
+    
     method = Method.objects.create()
     method.save()
     try: 
