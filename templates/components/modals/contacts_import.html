@@ -1,0 +1,83 @@
+{% load i18n %}
+
+<div id="mappingModal" class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" style="grid-template-rows: auto 1fr;">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="text-xl font-medium">{% translate 'Map Import Fields' %}</h1>
+        <button class="modal-close" id="closeModal">
+            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+    </div>
+    <hr class="mb-3 mt-1">
+    <div class="grid grid-rows-9 grid-cols-2 gap-0.5">
+         {% for field in contact_form %}
+            {% if field.name not in "id,created_at,method" %}
+                <label for="{{ field.id_for_label }}">{% translate field.label %}{% if field.field.required %}<span class="text-red-600">*</span>{% endif %}</label>
+                <select name="{% translate field.name %}" id="{% translate field.name %}" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
+            {% endif %}
+        {% endfor %}
+
+        <!-- TODO: allow user to set a default value for the ones with no column -->
+
+        <div class="mt-2"></div> <!-- Placeholder grid item so the button will float right -->
+        <button id="importContacts" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700 mt-2">{% translate 'Import Contacts' %}</button>
+    </div>
+</div>
+
+<div class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" style="grid-template-rows: auto 1fr;" id="importModal">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="text-xl font-medium">{% translate 'Import Contacts' %}</h1>
+        <button class="modal-close" id="closeModal">
+            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+    </div>
+    <hr class="mb-3 mt-1">
+    <input
+        type="file"
+        class="text-sm
+            file:mr-5 file:py-1 file:px-3 file:border-[1px]
+            file:text-xs file:font-medium
+            hover:file:cursor-pointer hover:file:bg-blue-50
+            hover:file:text-blue-700 w-full"
+        multiple
+        accept="text/csv"
+        id="contactsFile"
+    />
+    <button id="importAction" class="float-right text-black mt-1 bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700">{% translate 'Import' %}</button>
+    <script>
+        $('#importAction').on('click', function() {
+            const file = $("#contactsFile").prop('files')[0];
+            if (!file) {
+                console.log("NO FILE SELECTED");
+                return;
+            }
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('csrfmiddlewaretoken', $('#csrf').text());
+            $.ajax({
+                url: "{% url 'read_file' %}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log("UPLOAD SUCCESS");
+                    // data is string which represents csv, get the first line/row
+                    const headers = data.split('\n')[0].split(',');
+                    $(".mappingCols").each(function(index, element) {
+                        $(element).empty();
+                        $(element).append("<option value=''>{% translate 'Select a column' %}</option>");
+                        headers.forEach(header => {
+                            $(element).append(`<option value="${header}">${header}</option>`);
+                        });
+                    });
+
+                    $("#mappingModal").fadeIn(300);
+                    $("#importModal").fadeOut(300);
+                },
+                error: function(err) {
+                    console.log(`ERROR DURING FILE UPLOAD: ${err}`);
+                }
+            });
+        });
+    </script>
+</div>
