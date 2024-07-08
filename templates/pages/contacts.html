@@ -4,126 +4,12 @@
 
 {% block parent_attrs %}class="overflow-auto p-4 grid grid-rows-4 grid-cols-2 gap-2" style="grid-template-columns: 3fr 1fr;grid-template-rows: auto auto auto{% if message %} auto{% endif %} 1fr;"{% endblock %}
 {% block content %}
-<div id="mappingModal" class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" style="grid-template-rows: auto 1fr;">
-    <div class="flex flex-row items-center justify-between">
-        <h1 class="text-xl font-medium">Map Import Fields</h1>
-        <button class="modal-close" id="closeModal">
-            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-    </div>
-    <hr class="mb-3 mt-1">
-    <div class="grid grid-rows-9 grid-cols-2 gap-0.5">
-        <label for="email">Email Address<span class="text-red-600">*</span></label>
-        <select name="email" id="email" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="first_name">First Name:</label>
-        <select name="first_name" id="first_name" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="last_name">Last Name:</label>
-        <select name="last_name" id="last_name" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="address">Address:</label>
-        <select name="address" id="address" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="phone">Phone Number:</label>
-        <select name="phone" id="phone" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="birthday">Birthday:</label>
-        <select name="birthday" id="birthday" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="source">Source:</label>
-        <select name="source" id="source" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="tags">Tags:</label>
-        <select name="tags" id="tags" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <label for="subscribed">Subscribed?</label>
-        <select name="subscribed" id="subscribed" class="border border-neutral-400 bg-neutral-100 text-black mappingCols"></select>
-        <div class="mt-2"></div> <!-- Placeholder grid item so the button will float right -->
-        <button id="importContacts" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700 mt-2">{% translate 'Import Contacts' %}</button>
-    </div>
-</div>
-<div class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" style="grid-template-rows: auto 1fr;" id="importModal">
-    <div class="flex flex-row items-center justify-between">
-        <h1 class="text-xl font-medium">Import Contacts</h1>
-        <button class="modal-close" id="closeModal">
-            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-    </div>
-    <hr class="mb-3 mt-1">
-    <input
-        type="file"
-        class="text-sm
-            file:mr-5 file:py-1 file:px-3 file:border-[1px]
-            file:text-xs file:font-medium
-            hover:file:cursor-pointer hover:file:bg-blue-50
-            hover:file:text-blue-700 w-full"
-        multiple
-        accept="text/csv"
-        id="contactsFile"
-    />
-    <button id="importAction" class="float-right text-black mt-1 bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700">{% translate 'Import' %}</button>
-    <script>
-        $('#importAction').on('click', function() {
-            const file = $("#contactsFile").prop('files')[0];
-            if (!file) {
-                console.log("NO FILE SELECTED");
-                return;
-            }
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('csrfmiddlewaretoken', $('#csrf').text());
-            $.ajax({
-                url: "{% url 'read_file' %}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    console.log("UPLOAD SUCCESS");
-                    // data is string which represents csv, get the first line/row
-                    const headers = data.split('\n')[0].split(',');
-                    $(".mappingCols").each(function(index, element) {
-                        $(element).empty();
-                        $(element).append("<option value=''>{% translate 'Select a column' %}</option>");
-                        headers.forEach(header => {
-                            $(element).append(`<option value="${header}">${header}</option>`);
-                        });
-                    });
 
-                    $("#mappingModal").fadeIn(300);
-                    $("#importModal").fadeOut(300);
-                },
-                error: function(err) {
-                    console.log(`ERROR DURING FILE UPLOAD: ${err}`);
-                }
-            });
-        });
-    </script>
-</div>
-<div class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" id="addSingleModal">
-    <div class="flex flex-row items-center justify-between">
-        <h1 class="text-xl font-medium">Add Single Contact</h1>
-        <button class="modal-close" id="closeModal">
-            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-    </div>
-    <hr class="mb-3 mt-1">
-    <form action="{% url 'contacts/create' %}" method="POST" id="addSingleForm" class="grid grid-rows-12 grid-cols-2 gap-0.5">
-        {% csrf_token %}
-        
-        {% for field in contact_form %}
-        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="text-red-600">*</span>{% endif %}</label>
-        {{ field }}
-        {% endfor %}
-        <div></div>
-        <button id="addSingleAction" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700 mt-2">{% translate 'Add Contact' %}</button>
-    </form>
-</div>
+{% include 'components/modals/contacts_import.html' %}
+{% include 'components/modals/contacts_single.html' %}
 
 <p id="csrf" class="hidden">{{ csrf_token }}</p>
-<div id="alertBox" class="hidden border border-2 flex flex-row col-span-2 gap-2 justify-start items-center p-4">
-    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-    <div class="flex flex-col justify-start">
-        <h1 id="alertTitle" class="font-bold text-md capitalize"></h1>
-        <span id="alertMessage" class="text-sm"></span>
-    </div>
-    <button onclick="$(this).parent().toggleClass('hidden')" class="ms-auto">
-        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-    </button>
-</div>
+{% include 'components/alert.html' with message=message %}
 <div class="flex flex-col gap-2 justify-between items-stretch col-span-2 text-center md:text-start md:flex-row md:gap-0">
     <h1 class="text-2xl md:text-3xl">{% translate 'Select Contact to change' %}</h1>
     <div class="flex flex-row items-stretch justify-center gap-2">
@@ -194,10 +80,7 @@
     </select>
     <button id="applyActions" class="bg-neutral-200 hover:bg-neutral-300 px-2 rounded-box border border-neutral-400">{% translate 'Apply' %}</button>
     <h1 id="selectionCount" class="mx-auto text-md me-1 self-center">0 {% translate 'out of' %} {{ total_contacts }} {% translate 'selected'%}, <a id="select-all" href="javascript:void(0);" class="text-blue-500">Select All</a></h1>
-    <button id="previousPage" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">{% translate 'Previous' %}</button>
-    <input id="pageInput" type="text" class="border border-neutral-500 max-w-7 text-center" value="{{ request.GET.p|default:'1' }}" max="{{ pages_count }}">
-    <h1 id="pagesInfo" class="text-lg">{% translate 'of' %} {{pages_count}}</h1>
-    <button id="nextPage" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-500">{% translate 'Next' %}</button>
+    {% include 'components/pagination.html' with pages_count=pages_count %}
 </div>
 <div id="contactsContainer" class="overflow-auto" style="max-height: 36.75rem!important;">
     <table class="text-left w-full whitespace-nowrap"> 

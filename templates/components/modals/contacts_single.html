@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div class="modal shadow-lg p-4 bg-neutral-200 border border-neutral-500 min-w-96 hidden" id="addSingleModal">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="text-xl font-medium">{% translate 'Add Single Contact' %}</h1>
+        <button class="modal-close" id="closeModal">
+            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="current"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+    </div>
+    <hr class="mb-3 mt-1">
+    <form action="{% url 'contacts/create' %}" method="POST" id="addSingleForm" class="grid grid-rows-12 grid-cols-2 gap-0.5">
+        {% csrf_token %}
+        
+        {% for field in contact_form %}
+        <label for="{{ field.id_for_label }}">{% translate field.label %}{% if field.field.required %}<span class="text-red-600">*</span>{% endif %}</label>
+        {{ field }}
+        {% endfor %}
+        <div></div>
+        <button id="addSingleAction" class="bg-primary px-3 bg-primary-hover rounded-box border border-neutral-700 mt-2">{% translate 'Add Contact' %}</button>
+    </form>
+</div>
